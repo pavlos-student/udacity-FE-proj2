@@ -17,7 +17,6 @@
  * Define Global Variables
  * 
 */
-// const virtualDOMFragment = document.createDocumentFragment();
 // get the UL element that represents the navigation nav-bar
 const navigationElement = document.getElementById('navbar__list');
 // get all the sections
@@ -38,6 +37,7 @@ const sectionList = document.querySelectorAll('section');
 */
 
 // build the nav
+//
 const navBuilder = () => {
     // init the variable that will hold the navigation UI
     let navUI = '';
@@ -50,15 +50,10 @@ const navBuilder = () => {
     });
     // append the navUI elements (<li>) to the navigationElement (<ul>)
     navigationElement.innerHTML = navUI;
-
-    // virtualDOMFragment.appendChild(navigationElement);
-    // document.body.appendChild(virtualDOMFragment);
 };
-// call the navigation builder function to add dynamically the menu list to the nav-bar
-navBuilder();
 
 // Add class 'active' to section when near top of viewport
-
+//
 // gets the size of the element and its position relative to the viewport.
 const sectionOffset = (section) => {
     return Math.floor(section.getBoundingClientRect().top);
@@ -88,10 +83,14 @@ const activateSection = () => {
     })
 };
 
-window.addEventListener('scroll', activateSection);
-
 // Scroll to anchor ID using scrollTO event
-
+//
+const scrollToSection = () => {
+    navigationElement.addEventListener('click', (event)=>{
+       const clicked = document.querySelector('#' + event.dataset.nav);
+       clicked.scrollIntoView();
+    });
+};
 
 /**
  * End Main Functions
@@ -99,10 +98,13 @@ window.addEventListener('scroll', activateSection);
  * 
 */
 
-// Build menu 
+// Build menu
+navBuilder(); // call the navigation builder function to add dynamically the menu list to the nav-bar
 
 // Scroll to section on link click
+scrollToSection();
 
 // Set sections as active
+window.addEventListener('scroll', activateSection);
 
 
