@@ -51,7 +51,7 @@ const navBuilder = () => {
     // append the navUI elements (<li>) to the navigationElement (<ul>)
     navigationElement.innerHTML = navUI;
 };
-
+//
 // Add class 'active' to section when near top of viewport
 //
 // gets the size of the element and its position relative to the viewport.
@@ -83,15 +83,6 @@ const activateSection = () => {
     })
 };
 
-// Scroll to anchor ID using scrollTO event
-//
-const scrollToSection = () => {
-    navigationElement.addEventListener('click', (event)=>{
-       const clicked = document.querySelector('#' + event.dataset.nav);
-       clicked.scrollIntoView();
-    });
-};
-
 /**
  * End Main Functions
  * Begin Events
@@ -101,9 +92,8 @@ const scrollToSection = () => {
 // Build menu
 navBuilder(); // call the navigation builder function to add dynamically the menu list to the nav-bar
 
-// Scroll to section on link click
-scrollToSection();
-
+// Scroll to section on link click using scroll event
+// AND
 // Set sections as active
 window.addEventListener('scroll', activateSection);
 
