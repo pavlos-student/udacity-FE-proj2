@@ -28,8 +28,6 @@ const sectionList = document.querySelectorAll('section');
  * 
 */
 
-
-
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -46,11 +44,12 @@ const navBuilder = () => {
         const sectionId = section.id;
         const sectionDataNav = section.dataset.nav;
 
-        navUI += `<li><a class="menu__link" href="#${sectionId}">${sectionDataNav}</a></li>`;
+        navUI += `<li><a class="menu__link" data-link="${sectionId}">${sectionDataNav}</a></li>`
     });
     // append the navUI elements (<li>) to the navigationElement (<ul>)
     navigationElement.innerHTML = navUI;
 };
+
 //
 // Add class 'active' to section when near top of viewport
 //
@@ -92,9 +91,12 @@ const activateSection = () => {
 // Build menu
 navBuilder(); // call the navigation builder function to add dynamically the menu list to the nav-bar
 
-// Scroll to section on link click using scroll event
-// AND
+// Scroll to section on section link click (listens to the mouse click-event in the navlist (navbar__list)
+navigationElement.addEventListener('click', (event) => {
+    event.preventDefault();
+    const sectionToScrollTo = document.getElementById(event.target.dataset.link);
+    sectionToScrollTo.scrollIntoView({block: 'end', behavior: 'smooth'});
+});
+
 // Set sections as active
 window.addEventListener('scroll', activateSection);
-
-
